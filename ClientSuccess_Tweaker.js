@@ -20,7 +20,7 @@ async function getClientSuccess(path){
 var topBarInjector = setInterval(function(){
 	if($('.disp-pre-body').find('table tr').length > 0){
 		clearInterval(topBarInjector);
-		$('.disp-pre-body').find('table tr').append('<td class="details-data details-data-indented"><ul><li><span class="title" style="width: 85px">Contract Value</span><span class="detail" id="contract-value-value">Loading...</span></li></ul></td>');
+		$('.disp-pre-body').find('table tr').append('<td class="details-data details-data-indented"><ul><li><span class="title" style="width: 102px">Contract Value</span><span class="detail" id="contract-value-value">Loading...</span></li></ul></td>');
 		topBarInjected = true;
 	}
 }, 300);
@@ -28,7 +28,6 @@ var topBarInjector = setInterval(function(){
 
 var contactContainerListener = setInterval(async function(){
     if($('.contact-item').length > 0 && $('.all-contacts').not('.support-tool-patched').length > 0){
-    	//clearInterval(contactContainerListener);
     	$('.all-contacts').not('.support-tool-patched').addClass('support-tool-patched');
         console.log('Contacts loaded!');
         // get the client ID
@@ -60,13 +59,12 @@ var contactContainerListener = setInterval(async function(){
         	console.log('ClientSuccess Extension Failing ERR 1');
         }
     }
-}, 300);
+}, 1000);
 
 var clientCustomFieldListener = setInterval(function(){
 	console.log('Checking custom...');
 	if($('.custom-fields-app').find( "label:contains('Contract Value')" ).length > 0 && topBarInjected === true){
 		console.log('Injecting custom');
-		clearInterval(clientCustomFieldListener);
 		$('#contract-value-value').text($('.custom-fields-app').find( "label:contains('Contract Value')" ).parent().find('.content-editable').text());
 	}
-}, 300);
+}, 1000);
