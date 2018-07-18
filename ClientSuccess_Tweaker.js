@@ -1,5 +1,5 @@
 const clientSuccessAuth      = localStorage.getItem('auth');
-const clientSuccessBasicPath = 'https://app.clientsuccess.com/api/api/';
+const clientSuccessBasicPath = 'https://app.clientsuccess.com/api/';
 let currentClientContacts    = [];
 let topBarInjected = false;
 
@@ -36,10 +36,10 @@ var contactContainerListener = setInterval(async function(){
         	// we have our Client ID
         	const clientID = currentURL[3];
         	// grab the client contacts
-	        var contacts = await getClientSuccess('client/' + clientID + '/contact');
+	        var contacts = await getClientSuccess('api/client/' + clientID + '/contact');
 	        // loop through the contacts from the client and get their details
 	        for(i = 0; i < contacts.length; i++){
-	        	const contactDetails = await getClientSuccess('client/' + clientID + '/contact/' + contacts[i].id + '/detail');
+	        	const contactDetails = await getClientSuccess('api/client/' + clientID + '/contact/' + contacts[i].id + '/detail');
 	        	// store contact details (attribtues we care about) in final array for easy parsing later (key on name)
 	        	currentClientContacts.push([contacts[i].name, contactDetails]);
 	        }
@@ -68,3 +68,12 @@ var clientCustomFieldListener = setInterval(function(){
 		$('#contract-value-value').text($('.custom-fields-app').find( "label:contains('Contract Value')" ).parent().find('.content-editable').text());
 	}
 }, 1000);
+
+// fix for overlapping SuccessCycle headers
+var successCycleHeaderFix = setInterval(function(){
+	if($('.stage-navigator').length > 0 && $('.stage-navigator__next').length > 0 && $('.stage-navigator__prev').length > 0){
+		$('.stage-navigator').height('28px');
+		$('.stage-navigator__next').css('padding-top', '14px');
+		$('.stage-navigator__prev').css('padding-top', '14px');
+	}
+}, 300);
