@@ -50,7 +50,7 @@ var contactContainerListener = setInterval(async function(){
 				// loop through the found details array to find the approprate user detail object
 				for(i = 0; i < currentClientContacts.length; i++){
 					if($(this).find('span').first().text() == currentClientContacts[i][0]){
-						// append the account role to their name?
+						// append the account role to their name
 						$(this).find('span').first().text(currentClientContacts[i][0] + ' - ' + currentClientContacts[i][1].customFieldValues[1].value)
 					}
 				}
@@ -75,5 +75,16 @@ var successCycleHeaderFix = setInterval(function(){
 		$('.stage-navigator').height('28px');
 		$('.stage-navigator__next').css('padding-top', '14px');
 		$('.stage-navigator__prev').css('padding-top', '14px');
+	}
+}, 300);
+
+// Expired Account Banner
+var clientTypeExpiredChecker = setInterval(function(){
+	if($('li[ng-if="SuccessPageCtrl.client.clientSegmentId"]').length > 0) {
+		if($('li[ng-if="SuccessPageCtrl.client.clientSegmentId"]').find('.detail').text() == "Expired"){
+			if($('#expired-client-container').length == 0){
+				$('div[ng-if="!SuccessPageCtrl.loading"]').prepend('<div id="expired-client-container" style="width: 100%; background-color: red; color: white; padding: 8px; font-size: 24px" align="center">EXPIRED CLIENT</div>');	
+			}
+		}
 	}
 }, 300);
