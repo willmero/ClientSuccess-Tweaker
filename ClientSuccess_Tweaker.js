@@ -51,7 +51,7 @@ var contactContainerListener = setInterval(async function(){
 				for(i = 0; i < currentClientContacts.length; i++){
 					if($(this).find('span').first().text() == currentClientContacts[i][0]){
 						// append the account role to their name?
-						$(this).find('span').first().text(currentClientContacts[i][0] + ' - ' + currentClientContacts[i][1].customFieldValues[0].value)
+						$(this).find('span').first().text(currentClientContacts[i][0] + ' - ' + currentClientContacts[i][1].customFieldValues[1].value)
 					}
 				}
 			});
